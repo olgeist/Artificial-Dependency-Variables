@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusAI - Interface Hub</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fb;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #1a237e;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        /* Controller Form Styles */
+        .controller-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .controller-form select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        .controller-form button {
+            padding: 10px 20px;
+            background-color: #00c853;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        /* Category Forms Layout */
+        .category-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .category-form button {
+            padding: 15px 30px;
+            background-color: #3949ab;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .category-form button:hover {
+            background-color: #283593;
+        }
+        /* Mock Images Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .card img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NexusAI Org Design</h1>
+        <p>Connecting Minds. Scaling Systems. Growing Futures.</p>
+    </header>
+
+    <!-- Controller Form: Ensures clear alignment of categories -->
+    <div class="controller-form">
+        <h3>Master Alignment Controller</h3>
+        <form action="#" method="GET">
+            <label for="alignment">Select Team Alignment: </label>
+            <select name="alignment" id="alignment">
+                <option value="all">All Departments</option>
+                <option value="neural">Neural Engineering</option>
+                <option value="ethics">AI Ethics & Safety</option>
+                <option value="product">Product Scaling</option>
+            </select>
+            <button type="submit">Align Teams</button>
+        </form>
+    </div>
+
+    <!-- Multiple Simple Forms as Category Buttons -->
+    <div class="category-container">
+        <form action="#" method="POST" class="category-form">
+            <input type="hidden" name="category" value="engineering">
+            <button type="submit">🧠 Mind Sync (Engineering)</button>
+        </form>
+        
+        <form action="#" method="POST" class="category-form">
+            <input type="hidden" name="category" value="growth">
+            <button type="submit">📈 Scale Pathways (Growth)</button>
+        </form>
+
+        <form action="#" method="POST" class="category-form">
+            <input type="hidden" name="category" value="interface">
+            <button type="submit">🖥️ Interface UI/UX</button>
+        </form>
+    </div>
+
+    <!-- Mock Images Grid to Showcase Interfaces -->
+    <div class="grid">
+        <div class="card">
+            <!-- Using Placehold.co for mock images -->
+            <img src="https://placehold.co/400x250/3949ab/ffffff?text=Data+Dashboard" alt="Mock Dashboard">
+            <h4>Data Flow Dashboard</h4>
+            <p>Visualizing scaling metrics across the AI pipeline.</p>
+        </div>
+        <div class="card">
+            <img src="https://placehold.co/400x250/00c853/ffffff?text=Team+Alignment+UI" alt="Mock Team UI">
+            <h4>Alignment Matrix</h4>
+            <p>Connecting cross-functional minds effectively.</p>
+        </div>
+        <div class="card">
+            <img src="https://placehold.co/400x250/ff6d00/ffffff?text=Growth+Chart" alt="Mock Growth UI">
+            <h4>Growth Projection</h4>
+            <p>Pathways to scale model parameters and user base.</p>
+        </div>
+    </div>
+
+</body>
+</html>
