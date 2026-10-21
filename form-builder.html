@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form-First Module Builder</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; height: 100vh; background-color: #f0f2f5; }
+        
+        /* Layout */
+        .form-panel { width: 35%; background: #ffffff; padding: 20px; overflow-y: auto; border-right: 1px solid #ddd; box-shadow: 2px 0 5px rgba(0,0,0,0.05); }
+        .preview-panel { width: 65%; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
+
+        h2 { margin-top: 0; color: #1a237e; font-size: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        /* Form Styles */
+        .module-form { background: #f8f9fa; border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .module-form h3 { margin: 0 0 15px 0; font-size: 16px; color: #333; display: flex; justify-content: space-between; align-items: center; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 5px; color: #555; text-transform: uppercase; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; }
+        .form-group textarea { resize: vertical; height: 60px; }
+        
+        /* Preview Styles (The Modules) */
+        .preview-module { padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        
+        /* Specific Module Overrides */
+        #mod-hero-preview { background-color: #1a237e; color: white; text-align: center; }
+        #mod-hero-preview h1 { margin: 0 0 10px 0; font-size: 32px; }
+        #mod-hero-preview p { margin: 0; font-size: 18px; opacity: 0.9; }
+
+        #mod-content-preview { background-color: white; color: #333; }
+        #mod-content-preview h2 { border: none; color: inherit; padding: 0; }
+        
+        #mod-cta-preview { background-color: #00c853; color: white; text-align: center; }
+        .btn-preview { display: inline-block; padding: 10px 25px; background: #ffffff; color: #00c853; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 15px; }
+
+    </style>
+</head>
+<body>
+
+    <!-- LEFT PANEL: The Form Controller -->
+    <div class="form-panel">
+        <h2>Module Editor Forms</h2>
+        <p style="font-size: 13px; color: #666;">Edit the text and settings below to modify the active modules instantly.</p>
+
+        <!-- Form: Hero Module -->
+        <form class="module-form" id="form-hero">
+            <h3>1. Hero Header</h3>
+            <div class="form-group">
+                <label>Headline Text</label>
+                <input type="text" id="hero-title-input" value="Connect. Scale. Grow.">
+            </div>
+            <div class="form-group">
+                <label>Subheadline Words</label>
+                <input type="text" id="hero-sub-input" value="The Future of AI Org Design.">
+            </div>
+            <div class="form-group">
+                <label>Background Color</label>
+                <input type="color" id="hero-bg-input" value="#1a237e">
+            </div>
+        </form>
+
+        <!-- Form: Text Content Module -->
+        <form class="module-form" id="form-content">
+            <h3>2. Text Block</h3>
+            <div class="form-group">
+                <label>Section Title</label>
+                <input type="text" id="content-title-input" value="Why NexusAI?">
+            </div>
+            <div class="form-group">
+                <label>Paragraph Words</label>
+                <textarea id="content-text-input">Building the future of Artificial Intelligence requires more than just compute power—it requires human synergy. We provide the exact blueprint you need to scale.</textarea>
+            </div>
+        </form>
+
+        <!-- Form: Call to Action Module -->
+        <form class="module-form" id="form-cta">
+            <h3>3. Call to Action</h3>
+            <div class="form-group">
+                <label>Call to Action Text</label>
+                <input type="text" id="cta-text-input" value="Ready to align your minds?">
+            </div>
+            <div class="form-group">
+                <label>Button Words</label>
+                <input type="text" id="cta-btn-input" value="Start Designing">
+            </div>
+            <div class="form-group">
+                <label>Module Color</label>
+                <input type="color" id="cta-bg-input" value="#00c853">
+            </div>
+        </form>
+    </div>
+
+    <!-- RIGHT PANEL: Live Preview of Modifiable Modules -->
+    <div class="preview-panel">
+        
+        <!-- Hero Module Preview -->
+        <div class="preview-module" id="mod-hero-preview">
+            <h1 id="hero-title-output">Connect. Scale. Grow.</h1>
+            <p id="hero-sub-output">The Future of AI Org Design.</p>
+        </div>
+
+        <!-- Text Content Module Preview -->
+        <div class="preview-module" id="mod-content-preview">
+            <h2 id="content-title-output">Why NexusAI?</h2>
+            <p id="content-text-output">Building the future of Artificial Intelligence requires more than just compute power—it requires human synergy. We provide the exact blueprint you need to scale.</p>
+        </div>
+
+        <!-- CTA Module Preview -->
+        <div class="preview-module" id="mod-cta-preview">
+            <h3 id="cta-text-output" style="margin:0; font-size: 24px;">Ready to align your minds?</h3>
+            <a href="#" class="btn-preview" id="cta-btn-output">Start Designing</a>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT: Binds the Forms to the Preview Output -->
+    <script>
+        // Helper function to bind an input to a text output
+        function bindText(inputId, outputId) {
+            const inputElement = document.getElementById(inputId);
+            const outputElement = document.getElementById(outputId);
+            
+            // Listen for keystrokes to update text instantly
+            inputElement.addEventListener('input', function() {
+                outputElement.textContent = this.value;
+            });
+        }
+
+        // Helper function to bind an input to a CSS style output
+        function bindStyle(inputId, outputElementId, styleProperty) {
+            const inputElement = document.getElementById(inputId);
+            const outputElement = document.getElementById(outputElementId);
+            
+            inputElement.addEventListener('input', function() {
+                outputElement.style[styleProperty] = this.value;
+            });
+        }
+
+        // Bind Hero Form
+        bindText('hero-title-input', 'hero-title-output');
+        bindText('hero-sub-input', 'hero-sub-output');
+        bindStyle('hero-bg-input', 'mod-hero-preview', 'backgroundColor');
+
+        // Bind Content Form
+        bindText('content-title-input', 'content-title-output');
+        bindText('content-text-input', 'content-text-output');
+
+        // Bind CTA Form
+        bindText('cta-text-input', 'cta-text-output');
+        bindText('cta-btn-input', 'cta-btn-output');
+        bindStyle('cta-bg-input', 'mod-cta-preview', 'backgroundColor');
+        
+        // Match button text color to the selected background color
+        document.getElementById('cta-bg-input').addEventListener('input', function() {
+            document.getElementById('cta-btn-output').style.color = this.value;
+        });
+    </script>
+</body>
+</html>
