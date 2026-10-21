@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Pure HTML Word Editor</title>
+</head>
+<body bgcolor="#f3f2f1">
+
+    <h1>NexusAI Document Editor</h1>
+    <p>Select your formatting options below and type your content.</p>
+    <hr />
+
+    <form action="save_document.php" method="POST">
+        
+        <!-- Pure HTML Toolbar -->
+        <fieldset>
+            <legend>Formatting Toolbar</legend>
+            
+            <label for="text_color">Text Color: </label>
+            <select name="text_color" id="text_color">
+                <option value="black">Black</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="red">Red</option>
+            </select>
+
+            <label for="custom_color"> | Exact Color: </label>
+            <input type="color" name="custom_color" id="custom_color" value="#000000" />
+            
+            <label for="font_size"> | Font Size: </label>
+            <select name="font_size" id="font_size">
+                <option value="12pt">12 pt</option>
+                <option value="14pt">14 pt</option>
+                <option value="16pt">16 pt</option>
+            </select>
+        </fieldset>
+
+        <br />
+
+        <!-- Pure HTML Editor Area -->
+        <fieldset>
+            <legend>Document Content</legend>
+            <textarea name="document_content" rows="30" cols="100">Welcome to the NexusAI blueprint...
+
+Type your document here. Because this is pure HTML with no CSS or JavaScript, colors will not update live as you type. Your chosen settings in the toolbar will be applied to this text once you click Save.</textarea>
+        </fieldset>
+
+        <br />
+
+        <!-- Form Submission -->
+        <input type="submit" value="Save Document" />
+        <input type="reset" value="Clear Editor" />
+
+    </form>
+
+</body>
+</html>
